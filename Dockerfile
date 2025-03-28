@@ -1,29 +1,29 @@
-# Usa a imagem oficial do PHP com extensões necessárias
+# Uses the official PHP image with required extensions
 FROM php:8.2-fpm
 
-# Instala dependências do sistema
+# Installs system dependencies
 RUN apt-get update && apt-get install -y \
     git unzip curl libpng-dev libjpeg-dev libfreetype6-dev \
     libonig-dev libxml2-dev zip libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql mbstring exif pcntl bcmath zip
 
-# Instala o Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Instalar e habilitar Redis
+# Install and enable Redis
 RUN pecl install redis && docker-php-ext-enable redis
 
-# Define o diretório de trabalho
+# Define the working directory
 WORKDIR /var/www
 
-# Copia os arquivos do Laravel para o container
+# Copy Laravel files to the container
 COPY . .
 
-# Dá permissão de escrita no storage e bootstrap/cache
+# Grant write access to the storage and bootstrap/cache directories
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Expõe a porta 9000 para comunicação com o Nginx
+# Exposes port 9000 for communication with Nginx
 EXPOSE 9000
 
 CMD ["php-fpm"]
