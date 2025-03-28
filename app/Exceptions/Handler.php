@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -24,7 +25,16 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+         //
         });
     }
+
+    public function render($request, Throwable $exception)
+{
+    if ($exception instanceof Exception && env('APP_DEBUG') === true) {
+        dd($exception);
+    }
+
+    return parent::render($request, $exception);
+}
 }
