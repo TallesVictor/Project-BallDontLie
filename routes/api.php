@@ -22,8 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route::middleware('x-auth')->group(function () {
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('x-auth')->group(function () {
 
     Route::controller(PlayerController::class)->prefix('player')->group(function () {
         Route::get('/list', 'index');
