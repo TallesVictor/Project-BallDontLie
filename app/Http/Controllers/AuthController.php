@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\DTOs\LoginDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Resources\AuthTokenResource;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
