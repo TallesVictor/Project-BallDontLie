@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('position', 10)->nullable();
             $table->string('height', 10)->nullable();
             $table->integer('weight')->nullable();
-            $table->string('jersey_number', 5)->nullable();
+            $table->string('jersey_number', 100)->nullable();
             $table->string('college', 150)->nullable();
             $table->string('country', 100);
             $table->integer('draft_year')->nullable();
