@@ -22,11 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('x-auth')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(PlayerController::class)->prefix('player')->group(function () {
-        Route::get('/list', 'index');
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{player}', 'show');
+        Route::put('/{player}', 'update');
+        Route::delete('/{player}', 'destroy')->middleware('can:isAdmin');
     });
+
+
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
