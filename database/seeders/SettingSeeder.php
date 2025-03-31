@@ -20,6 +20,11 @@ class SettingSeeder extends Seeder
                     'name' => 'key_balldontlie',
                     'value' => '"eabe2808-4427-4606-832d-c83bf8f1cbc3"',
                 ],
+                [
+                    'group' => 'Hidden',
+                    'name' => 'base_url_balldontlie',
+                    'value' => '"https://api.balldontlie.io/v1"',
+                ]
             ]
         );
     }
