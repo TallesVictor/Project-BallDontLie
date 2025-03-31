@@ -13,11 +13,12 @@ class Team extends Model
     
     protected $fillable = [
         'id',
+        'team_origin_id',
+        'name',
+        'full_name',
         'conference',
         'division',
         'city',
-        'name',
-        'full_name',
         'abbreviation',
     ];
 
