@@ -19,7 +19,7 @@ class PlayerService
     {
         $this->teamRepository = app(TeamRepository::class);
     }
-    
+
     /**
      * Create a new player.
      *
@@ -29,7 +29,7 @@ class PlayerService
     public function createPlayer(PlayerStoreDTO $playerDTO)
     {
         $team =  $this->teamRepository->findByFullName($playerDTO->team_full_name);
-        
+
         $player = new Player($playerDTO->toArray());
         $player->team_id = $team->id;
         $player->save();
@@ -48,6 +48,7 @@ class PlayerService
         $page = $dto->page;
         $perPage = $dto->per_page;
         $players = Player::paginate($perPage, ['*'], 'page', $page);
+
         return $players->items();
     }
 
@@ -57,7 +58,8 @@ class PlayerService
      * @param  Player  $player  Player to be edited.
      * @return Player  Edited player.
      */
-    public function editPlayer(PlayerStoreDTO $playerDTO, Player $player){
+    public function editPlayer(PlayerStoreDTO $playerDTO, Player $player)
+    {
         $team = $this->teamRepository->findByFullName($playerDTO->team_full_name);
 
         $player->fill($playerDTO->toArray());
@@ -67,5 +69,4 @@ class PlayerService
 
         return $player;
     }
-
 }
