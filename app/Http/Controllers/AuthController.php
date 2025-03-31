@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\AuthServiceContract;
 use App\DTOs\LoginDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -12,13 +13,13 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
 
-    public function __construct(private AuthService $authService) {}
-
     public function login(LoginRequest $request)
     {
+        $authService = app(AuthServiceContract::class);
+
         $dto = LoginDTO::fromArray($request->validated());
-        $user =  $this->authService->login($dto);
-        
+        $user =  $authService->login($dto);
+
         if (!$user) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
@@ -30,9 +31,11 @@ class AuthController extends Controller
             ->setStatusCode(200);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->user()->currentAccessToken()->delete();
+        $authService = app(AuthServiceContract::class);
+        
+        $authService->logout();
         return response()->json(['message' => 'Logout successfully'], 200);
     }
 }

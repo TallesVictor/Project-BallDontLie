@@ -2,14 +2,22 @@
 
 namespace App\Services;
 
+use App\Contracts\AuthServiceContract;
 use App\DTOs\LoginDTO;
-use App\Repositories\Contracts\AuthRepositoryInterface;
 use App\Repositories\UserRepository;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 
-class AuthService
+class AuthService implements AuthServiceContract
 {
 
+    protected $auth;
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+        
+    }
+    
     public function login(LoginDTO $credentials)
     {
         $userRepository = app(UserRepository::class);
@@ -27,5 +35,14 @@ class AuthService
         }
 
         return null;
+    }
+
+    public function getUser()
+    {
+        return $this->auth->user();
+    }
+
+    public function logout(){
+        $this->auth->user()->currentAccessToken()->delete();
     }
 }

@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class XAuthorizationMiddleware
+class IsAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,8 @@ class XAuthorizationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->hasHeader('X-Authorization')) {
-            $token = $request->header('X-Authorization');
-
-            if (!str_starts_with($token, 'Bearer ')) {
-                $token = 'Bearer ' . $token;
-            }
-
-            $request->headers->set('Authorization', $token);
+        if (!Auth::check() || !Auth::user()->isAdmin()) {
+            return response()->json(['error' => 'You are not an admin, you are not allowed to perform this action'], 403);
         }
 
         return $next($request);
