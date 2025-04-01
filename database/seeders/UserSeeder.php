@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             User::factory()->create([
                 'name' => 'User - Test User',
                 'email' => 'user@example.com',
-                'role_id' => Role::where('name', 'Admin')->first()->id
+                'role_id' => Role::where('name', 'User')->first()->id
             ]);
             
         }
