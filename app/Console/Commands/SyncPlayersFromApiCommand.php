@@ -34,11 +34,6 @@ class SyncPlayersFromApiCommand extends Command
     {
         $this->output->title('Syncing players from api');
 
-
-        Player::truncate();
-        Cache::clear();
-
-
         $this->syncPlayers();
 
         Cache::forget('cursor.player');

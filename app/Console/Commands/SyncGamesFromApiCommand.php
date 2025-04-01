@@ -34,10 +34,6 @@ class SyncGamesFromApiCommand extends Command
     {
         $this->output->title('Syncing games from api');
 
-
-        Game::truncate();
-        Cache::clear();
-
         $this->syncGames();
 
         Cache::forget('cursor.game');
