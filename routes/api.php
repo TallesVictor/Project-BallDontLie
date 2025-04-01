@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'store');
         Route::get('/{player}', 'show');
         Route::put('/{player}', 'update');
-        Route::delete('/{player}', 'destroy')->middleware('can:isAdmin');
+        Route::delete('/{player}', 'destroy')->middleware(\App\Http\Middleware\IsAdminMiddleware::class);
     });
 
 
