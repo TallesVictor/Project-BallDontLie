@@ -2,12 +2,9 @@
 
 namespace App\Services;
 
-use App\DTOs\LoginDTO;
 use App\DTOs\PlayerIndexDTO;
 use App\DTOs\PlayerStoreDTO;
-use App\Http\Requests\Auth\PlayerIndexRequest;
 use App\Models\Player;
-use App\Models\Team;
 use App\Repositories\TeamRepository;
 
 class PlayerService

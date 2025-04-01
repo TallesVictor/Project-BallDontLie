@@ -8,7 +8,7 @@ class PlayerIndexDTO
         public string $page,
         public string $per_page,
     ) {}
-    
+
     public static function fromArray(array $data): self
     {
         return new self(
@@ -16,7 +16,7 @@ class PlayerIndexDTO
             per_page: $data['per_page'],
         );
     }
-    
+
     public function toArray(): array
     {
         return [

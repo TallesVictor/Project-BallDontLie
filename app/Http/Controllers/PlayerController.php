@@ -13,6 +13,12 @@ use App\Services\PlayerService;
 class PlayerController extends Controller
 {
 
+    /**
+     * Display a listing of players with pagination.
+     *
+     * @param  PlayerIndexRequest  $request  The request containing pagination parameters.
+     * @return array<string, mixed>  An array containing the paginated list of players and pagination metadata.
+     */
     public function index(PlayerIndexRequest $request)
     {
         $playerService = new PlayerService();
@@ -29,6 +35,12 @@ class PlayerController extends Controller
         ];
     }
 
+    /**
+     * Store a newly created player in storage.
+     *
+     * @param  PlayerStoreRequest  $request  The request containing player data.
+     * @return \Illuminate\Http\JsonResponse  The JSON response containing the created player resource.
+     */
     public function store(PlayerStoreRequest $request)
     {
         $playerService = new PlayerService();
@@ -41,7 +53,14 @@ class PlayerController extends Controller
         )->setStatusCode(201);
     }
 
- 
+
+
+    /**
+     * Display the specified player.
+     *
+     * @param  Player  $player  The player instance to display.
+     * @return \Illuminate\Http\JsonResponse  The JSON response containing the player resource.
+     */
     public function show(Player $player)
     {
         return response()->json(
@@ -49,7 +68,14 @@ class PlayerController extends Controller
         );
     }
 
-   
+
+    /**
+     * Update the specified player in storage.
+     *
+     * @param  Player  $player  The player instance to update.
+     * @param  PlayerStoreRequest  $request  The request containing player data.
+     * @return \Illuminate\Http\JsonResponse  The JSON response containing the updated player resource.
+     */
     public function update(Player $player, PlayerStoreRequest $request)
     {
         $playerService = new PlayerService();
@@ -59,9 +85,15 @@ class PlayerController extends Controller
 
         return response()->json(
             PlayerResource::make($player)
-        )->setStatusCode(201);
+        )->setStatusCode(200);
     }
 
+    /**
+     * Remove the specified player from storage.
+     *
+     * @param  Player  $player  The player instance to delete.
+     * @return \Illuminate\Http\JsonResponse  The JSON response containing the deletion message.
+     */
     public function destroy(Player $player)
     {
         $player->delete();
