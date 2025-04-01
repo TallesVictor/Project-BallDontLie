@@ -32,7 +32,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
 {
     if ($exception instanceof Exception && env('APP_DEBUG') === true) {
-        dd($exception);
+        // dd($exception);
     }
 
     return parent::render($request, $exception);
