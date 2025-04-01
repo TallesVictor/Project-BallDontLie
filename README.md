@@ -20,7 +20,8 @@ Se ainda não possui o Docker instalado, siga os passos:
 - Certifique-se de que a virtualização está ativada no BIOS.
 
 ### 2. Configurando o ambiente Laravel
-🔹 **Obs:** O Docker deve estar em execução no Windows antes de prosseguir.
+🔹 **Obs 1:** O Docker deve estar em execução no Windows antes de prosseguir.
+🔹 **Obs 2:** Caso deseje conectar com o banco de dados, comum SGBD, utilze a porta 3307.
 
 #### 🚀 Subindo os containers com Docker
 ```sh
@@ -35,6 +36,15 @@ docker exec -it php composer install
 #### 🔑 Gerando chave da aplicação
 ```sh
 docker exec -it php php artisan key:generate
+```
+#### ⚙️ Configurando .env
+```sh
+  - Copie o .env.example e renomeie para .env
+  - No .env , altere as váriaveis para os valores abaixo 
+  - DB_HOST=laravel_mysql
+    DB_DATABASE=laravel
+    DB_USERNAME=laravel
+    DB_PASSWORD=secret
 ```
 
 #### 🗂 Criando as tabelas no banco de dados
@@ -95,7 +105,9 @@ vendor/bin/phpunit --filter PlayerControllerTest
 ## 📌 Documentação das Rotas
 As rotas da API estão disponíveis no Postman.
 
-🔗 **Dica**: Para testar as rotas, utilize a extensão [Postman](https://www.postman.com/) ou o comando `curl` no terminal. [Json para importação](https://drive.google.com/file/d/1LqvkQAsUM_bbumrLo0142RtQjc24MwIh/view?usp=drive_link)
+## 🔗 Dica
+  - Para testar as rotas, utilize a extensão [Postman](https://www.postman.com/) ou o comando `curl` no terminal. 
+  - [Json do postman para importação, com rotas e documentação](https://drive.google.com/file/d/1U0zEAVb5l9XYPDlICv9m9BbGCNKVR3Qm/view?usp=sharing)
 
 
 ---
